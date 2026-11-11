@@ -147,9 +147,6 @@ export const Resident = () => {
           </VisitCard>
         ))}
       </VisitList>
-      <div style={{ marginTop: 24, textAlign: 'center' }}>
-        <LinkButton as={Link} to="/">← Volver</LinkButton>
-      </div>
     </PageContainer>
   );
 };

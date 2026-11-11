@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getToken } from '@/services/auth.service';
 import { ListIcon } from '@/components/Icons';
 import { Header } from '@/components/Header';
@@ -9,7 +9,6 @@ import {
   AuditItem,
   AuditList,
   AuditMeta,
-  BackLink,
   EmptyState,
   LoadingSpinner,
   PageContainer,
@@ -68,7 +67,6 @@ export const Audit = () => {
           </AuditItem>
         ))}
       </AuditList>
-      <BackLink as={Link} href="/">← Volver</BackLink>
     </PageContainer>
   );
 };

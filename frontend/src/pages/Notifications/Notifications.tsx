@@ -7,7 +7,6 @@ import { apiFetch } from '@/services/api';
 import {
   ActionButton,
   ActionRow,
-  BackLink,
   EmptyState,
   LoadingSpinner,
   NotificationItem,
@@ -96,7 +95,6 @@ export const Notifications = () => {
           </NotificationItem>
         ))}
       </NotificationList>
-      <BackLink as={Link} href="/">← Volver</BackLink>
     </PageContainer>
   );
 };
