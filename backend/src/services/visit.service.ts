@@ -1,7 +1,14 @@
 import { randomUUID } from 'crypto';
 import db from '../db/database';
+import { notifyInstallation } from './notification.service';
 
 export type VisitStatus = 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'EXPIRED' | 'FINALIZED';
+
+export function listVisitsByInstallation(params: { installationId: string }): unknown[] {
+  return db
+    .prepare('SELECT * FROM visit WHERE installation_id = ? ORDER BY requested_at DESC')
+    .all(params.installationId);
+}
 
 export function createVisit(params: {
   installationId: string;
@@ -18,6 +25,13 @@ export function createVisit(params: {
   db.prepare(
     'INSERT INTO visit (id, installation_id, unit_id, visitor_name, visitor_photo, reason, company, status, requested_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
   ).run(id, params.installationId, params.unitId, params.visitorName, params.visitorPhoto, params.reason, params.company, params.status, requestedAt);
+
+  notifyInstallation({
+    installationId: params.installationId,
+    visitId: id,
+    type: 'VISIT_REQUEST',
+    message: `Nueva solicitud de visita de ${params.visitorName}`,
+  });
 
   return { id };
 }
@@ -49,4 +63,13 @@ export function finalizeVisit(params: { id: string; finalizerId: string }): { id
   }
 
   return { id: params.id };
+}
+
+export function getVisitCard(visitId: string): unknown {
+  const visit = db.prepare('SELECT * FROM visit WHERE id = ?').get(visitId) as Record<string, unknown> | undefined;
+  if (!visit) return null;
+  const installation = db.prepare('SELECT id, name, type FROM installation WHERE id = ?').get(visit.installation_id);
+  const unit = visit.unit_id ? db.prepare('SELECT id, code, floor FROM unit WHERE id = ?').get(visit.unit_id) : null;
+  const responder = visit.responded_by ? db.prepare('SELECT id, email, role FROM user WHERE id = ?').get(visit.responded_by) : null;
+  return { visit, installation, unit, responder };
 }

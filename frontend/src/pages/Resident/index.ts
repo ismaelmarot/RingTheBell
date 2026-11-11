@@ -1,0 +1,1 @@
+export { Resident } from './Resident';

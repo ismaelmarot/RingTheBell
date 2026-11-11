@@ -1,8 +1,8 @@
 {
   "name": "ringthebell",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "Sistema de gestión de visitantes mediante QR",
+  "description": "Sistema de gesti\u00f3n de visitantes mediante QR",
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
     "dev:backend": "npm run dev --prefix backend",
