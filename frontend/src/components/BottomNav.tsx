@@ -10,9 +10,7 @@ const Nav = styled.nav`
   right: 0;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding: 8px 0;
-  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  align-items: stretch;
   background: var(--color-card);
   border-top: 0.5px solid var(--color-separator);
   z-index: 100;
@@ -28,15 +26,18 @@ const NavItem = styled(Link)<{ $active: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   padding: 4px 8px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: ${({ $active }) => ($active ? 'var(--color-turquoise)' : 'var(--color-text-secondary)')};
-  transition: color 0.15s ease;
+  border-radius: 0;
+  background: ${({ $active }) => ($active ? 'var(--color-petroleum)' : 'transparent')};
+  color: ${({ $active }) => ($active ? '#FFFFFF' : 'var(--color-text-secondary)')};
+  transition: background 0.15s ease, color 0.15s ease;
   min-width: 48px;
   min-height: 48px;
-  justify-content: center;
+  height: 100%;
+  text-decoration: none !important;
+
 
   &:active {
     transform: scale(0.95);
@@ -46,6 +47,7 @@ const NavItem = styled(Link)<{ $active: boolean }>`
 const NavLabel = styled.span`
   font-size: 10px;
   font-weight: 500;
+  text-decoration: none;
 `;
 
 const ROLE_LEVEL: Record<string, number> = {

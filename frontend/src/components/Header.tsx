@@ -6,7 +6,7 @@ const HeaderBar = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 16px;
   margin: 0;
   background: var(--color-petroleum);
   color: #FFFFFF;
@@ -31,7 +31,7 @@ const LeftSection = styled.div`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  min-width: 44px;
+  min-width: 4px;
   justify-content: flex-end;
 `;
 
@@ -49,7 +49,9 @@ const BackButton = styled.button`
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.15);
   border: none;
   cursor: pointer;
