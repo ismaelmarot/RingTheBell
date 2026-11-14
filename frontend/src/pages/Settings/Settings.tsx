@@ -80,7 +80,7 @@ export const Settings = () => {
             onClick={() => { logout(); navigate('/login'); }}
             style={{
               padding: '8px 16px',
-              borderRadius: '10px',
+              borderRadius: '999px',
               border: 'none',
               background: 'var(--color-danger)',
               color: '#FFFFFF',
